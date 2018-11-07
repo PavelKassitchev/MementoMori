@@ -36,7 +36,7 @@ public class DelayedMessageService extends IntentService {
     }
 
     private void showText(String text) {
-        Log.v("DelaydMessageService", "Here is the message: " + text);
+        Log.v("DelayedMessageService", "Here is the message FROM THE OFFICE: " + text);
     }
 
 
