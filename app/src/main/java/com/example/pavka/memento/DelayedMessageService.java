@@ -1,8 +1,12 @@
 package com.example.pavka.memento;
 
 import android.app.IntentService;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Intent;
+import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 
 /**
@@ -14,10 +18,18 @@ import android.util.Log;
 public class DelayedMessageService extends IntentService {
 
     public static final String EXTRA_MESSAGE = "message";
+    private Handler handler;
+    public static final int NOT_ID = 5455;
 
 
     public DelayedMessageService() {
         super("DelayedMessageService");
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int f, int ids) {
+        handler = new Handler();
+        return super.onStartCommand(intent, f, ids);
     }
 
     @Override
@@ -32,11 +44,32 @@ public class DelayedMessageService extends IntentService {
             }
         }
         String text = intent.getStringExtra(EXTRA_MESSAGE);
-        showText(text);
+        int flag = intent.getIntExtra("FLAG", 0);
+        showText(text, flag);
     }
 
-    private void showText(String text) {
-        Log.v("DelayedMessageService", "Here is the message FROM THE OFFICE: " + text);
+    private void showText(final String text, int flag) {
+        switch(flag) {
+            case 0:
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
+                    }
+                });
+                break;
+            case 1:
+                Intent intent = new Intent(this, MainActivity.class);
+                TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+                stackBuilder.addParentStack(MainActivity.class);
+                stackBuilder.addNextIntent(intent);
+                PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+                
+                break;
+            default:
+                Log.v("DelayedMessageService", "Here is the message FROM THE OFFICE: " + text);
+        }
+
     }
 
 

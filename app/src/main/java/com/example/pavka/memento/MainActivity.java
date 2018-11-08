@@ -7,6 +7,8 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
+    private int flag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -14,8 +16,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
-        Intent intent = new Intent(this, DelayedMessageService.class);
-        intent.putExtra(DelayedMessageService.EXTRA_MESSAGE, getResources().getString(R.string.button_response));
-        startService(intent);
+        int id = view.getId();
+        switch(id) {
+            case(R.id.toast):
+                flag = 0;
+                break;
+            case(R.id.notification):
+                flag = 1;
+                break;
+            case(R.id.button):
+                Intent intent = new Intent(this, DelayedMessageService.class);
+                intent.putExtra(DelayedMessageService.EXTRA_MESSAGE, getResources().getString(R.string.button_response));
+                intent.putExtra("FLAG", flag);
+                startService(intent);
+        }
+
     }
 }
