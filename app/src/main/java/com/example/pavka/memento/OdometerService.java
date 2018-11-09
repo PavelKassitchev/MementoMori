@@ -56,6 +56,6 @@ public class OdometerService extends Service {
         }
     }
     public double getMeters() {
-        return disctanceInMeters;
+        return disctanceInMeters/1600;
     }
 }

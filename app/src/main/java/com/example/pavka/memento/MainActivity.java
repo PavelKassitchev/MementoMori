@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         Intent intent = new Intent(this, OdometerService.class);
         bindService(intent, connection, Context.BIND_AUTO_CREATE);
+
     }
     @Override
     protected void onStop() {
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 if (odometer!=null) {
                     distance = odometer.getMeters();
                 }
-                String distanceStr = String.format("%10$, .1f meters", distance);
+                String distanceStr = String.format("%1$, .2f meters", distance);
                 distanceView.setText(distanceStr);
                 handler.postDelayed(this, 5000);
             }
