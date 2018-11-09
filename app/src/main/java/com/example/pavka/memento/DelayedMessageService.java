@@ -64,7 +64,7 @@ public class DelayedMessageService extends IntentService {
                 stackBuilder.addParentStack(MainActivity.class);
                 stackBuilder.addNextIntent(intent);
                 PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-
+                
                 break;
             default:
                 Log.v("DelayedMessageService", "Here is the message FROM THE OFFICE: " + text);
