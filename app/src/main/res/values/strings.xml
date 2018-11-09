@@ -2,5 +2,7 @@
     <string name="app_name">Memento</string>
     <string name="button_response">Timing!</string>
     <string name="button_text">My secret text</string>
+    <string name="toast_text">Toast</string>
+    <string name="notification_text">NOTIFICATION</string>
 
 </resources>
