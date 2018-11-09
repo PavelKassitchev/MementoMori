@@ -1,13 +1,29 @@
 package com.example.pavka.memento;
 
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int flag;
+    private OdometerService odometer;
+    private boolean bound = false;
+    private ServiceConnection connection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,21 +31,5 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void onClick(View view) {
-        int id = view.getId();
-        switch(id) {
-            case(R.id.toast):
-                flag = 0;
-                break;
-            case(R.id.notification):
-                flag = 1;
-                break;
-            case(R.id.button):
-                Intent intent = new Intent(this, DelayedMessageService.class);
-                intent.putExtra(DelayedMessageService.EXTRA_MESSAGE, getResources().getString(R.string.button_response));
-                intent.putExtra("FLAG", flag);
-                startService(intent);
-        }
 
-    }
 }
