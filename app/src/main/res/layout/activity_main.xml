@@ -9,12 +9,18 @@
 
     <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:textAppearanceLarge"
-            android:id="@+id/distance"
+            android:layout_height="wrap_content"
+            android:id="@+id/text"
             android:layout_centerHorizontal="true"
             android:singleLine="false"
-            android:textSize="60dp"
-
+            android:textSize="60sp"
     />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text"
+        android:text="@string/button_text"
+        android:id="@+id/button"
+
+        />
 </RelativeLayout>
