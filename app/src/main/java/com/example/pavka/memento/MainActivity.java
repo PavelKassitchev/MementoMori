@@ -2,6 +2,7 @@ package com.example.pavka.memento;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,11 +10,19 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+    public final static String USER = "user";
 
+    private static SharedPreferences sPrefs;
+    private final static String STORE_NAME = "store";
+
+    public static SharedPreferences getsPrefs() {
+        return sPrefs;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sPrefs = getSharedPreferences(STORE_NAME, MODE_PRIVATE);
 
     }
     @Override
