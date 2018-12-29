@@ -1,3 +1,5 @@
+package com.example.pavka.memento;
+
 import com.example.pavka.memento.LifeSpanCalculator;
 import com.example.pavka.memento.Questions;
 import com.example.pavka.memento.User;
