@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button:
-            Intent intent = new Intent(this, Questionnaire.class);
+            Intent intent = new Intent(this, QuestionnaireActivity.class);
             startActivityForResult(intent, 1);
         }
     }

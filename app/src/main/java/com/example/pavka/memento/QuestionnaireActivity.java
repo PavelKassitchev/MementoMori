@@ -3,7 +3,7 @@ package com.example.pavka.memento;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Questionnaire extends AppCompatActivity {
+public class QuestionnaireActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
