@@ -4,7 +4,7 @@ import com.example.pavka.memento.LifeSpanCalculator;
 import com.example.pavka.memento.Questions;
 import com.example.pavka.memento.User;
 
-import java.time.LocalDate;
+
 import java.util.Date;
 
 public class Cocoo implements LifeSpanCalculator {
