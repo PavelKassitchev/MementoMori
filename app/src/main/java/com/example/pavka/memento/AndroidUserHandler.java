@@ -7,8 +7,10 @@ import com.google.gson.Gson;
 public class AndroidUserHandler implements UserHandler{
 
 
-    private static SharedPreferences sPrefs;
-    private static Gson gson = new Gson();
+
+    private SharedPreferences sPrefs;
+    private Gson gson = new Gson();
+
 
     public void saveUser(User user)
     {
@@ -19,10 +21,17 @@ public class AndroidUserHandler implements UserHandler{
         editor.apply();
 
     }
-    public User getUser() {
+    public User extractUser() {
         sPrefs = MainActivity.getsPrefs();
         String userString = sPrefs.getString(MainActivity.USER, null);
         //TODO if null?
         return gson.fromJson(userString, User.class);
+    }
+
+
+    @Override
+    public double calculateLifeSpan(User user) {
+        LifeSpanCalculator lifeSpanCalculator = new Cocoo();
+        return lifeSpanCalculator.getLifeSpan(user);
     }
 }

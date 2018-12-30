@@ -25,26 +25,49 @@ public enum Questions {
     Q22("Вы принимаете витамин Е?", 1.5, -1.5);
 
 
+    public static int qLength = Questions.values().length;
     private final String QUESTION;
-    private final double IF_Positive;
-    private final double IF_Negative;
+    private final double IF_POSITIVE;
+    private final double IF_NEGATIVE;
 
-    Questions(String s, double p, double n)
-    {
+
+    Questions(String s, double p, double n) {
+
         QUESTION = s;
-        IF_Positive = p;
-        IF_Negative = n;
+        IF_POSITIVE = p;
+        IF_NEGATIVE = n;
     }
-    @Override
-    public String toString()
-    {
+
+    public String getQuestion() {
         return QUESTION;
     }
-    public static String[] getStringArray()
-    {
-        int len = Questions.values().length;
-        String [] qs = new String [len];
-        for (int i=0; i<len; i++) qs[i] = Questions.values()[i].toString();
+    public double getPositive() {
+        return IF_POSITIVE;
+    }
+    public double getNegative() {
+        return IF_NEGATIVE;
+    }
+
+    public static String[] getQuestions() {
+
+        String[] qs = new String[qLength];
+        for (int i=0; i<qLength; i++) {
+            qs[i] = Questions.values()[i].getQuestion();
+        }
         return qs;
+    }
+    public static double[] getPositives() {
+        double[] pos = new double[qLength];
+        for (int i=0; i<qLength; i++) {
+            pos[i] = Questions.values()[i].getPositive();
+        }
+        return pos;
+    }
+    public static double[] getNegatives() {
+        double[] neg = new double[qLength];
+        for (int i=0; i<qLength; i++) {
+            neg[i] = Questions.values()[i].getNegative();
+        }
+        return neg;
     }
 }
