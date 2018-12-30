@@ -25,7 +25,7 @@ public enum Questions {
     Q22("Вы принимаете витамин Е?", 1.5, -1.5);
 
 
-    public static int qLength = Questions.values().length;
+    private static int qLength = Questions.values().length;
     private final String QUESTION;
     private final double IF_POSITIVE;
     private final double IF_NEGATIVE;
@@ -36,6 +36,10 @@ public enum Questions {
         QUESTION = s;
         IF_POSITIVE = p;
         IF_NEGATIVE = n;
+    }
+
+    public static int getLength() {
+        return qLength;
     }
 
     public String getQuestion() {
