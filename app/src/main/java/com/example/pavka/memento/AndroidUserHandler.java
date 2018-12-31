@@ -32,7 +32,7 @@ public class AndroidUserHandler implements UserHandler{
             user.init();
             return user;
         }
-        return gson.fromJson(userString, User.class);
+        return gson.fromJson(userString, AndroidUser.class);
     }
 
 

@@ -12,6 +12,8 @@ public class AndroidUser implements User {
     private Date birthDate;
     private int[] userData;
 
+    //TODO replace init() with Constractor
+
     @Override
     public void init() {
         name = MainActivity.getAppContext().getString(R.string.default_username);

@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         context = getApplicationContext();
 
 
-
         userHandler = new AndroidUserHandler();
 
         user = userHandler.obtainUser();
@@ -77,9 +76,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 user.setBirthDate(birthDate);
                 updateView(user);
+                userHandler.saveUser(user);
 
             /*Intent intent = new Intent(this, QuestionnaireActivity.class);
             startActivityForResult(intent, 1);*/
+            break;
+            case R.id.clean:
+                //TODO recheck it!
+                user = new AndroidUser();
+                user.init();
+                updateView(user);
+                userHandler.saveUser(user);
         }
     }
 
@@ -97,6 +104,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             DateFormat formatter = new SimpleDateFormat("MMMM yyyy");
             String counter = formatter.format(lastDate);
             textCount.setText(counter);
+        }
+        else {
+            textCount.setText(context.getString(R.string.count));
         }
     }
 }
