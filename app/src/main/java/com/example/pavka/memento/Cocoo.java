@@ -8,6 +8,7 @@ public class Cocoo implements LifeSpanCalculator {
     public final double AVG_MALE = 68.583;
     public final double AVG_FEMALE = 77.953;
 
+
     private User user;
 
     public Cocoo(User user) {
@@ -17,7 +18,7 @@ public class Cocoo implements LifeSpanCalculator {
     public double getCurrentAge() {
         Date birthDate = user.getBirthDate();
         Date today = new Date();
-        double currentAge = (today.getTime() - birthDate.getTime()) / (1000 * 3600 * 24 * 365.25);
+        double currentAge = (today.getTime() - birthDate.getTime()) / MILLIS_IN_YEAR;
         return currentAge;
     }
 
@@ -39,6 +40,8 @@ public class Cocoo implements LifeSpanCalculator {
         return correction;
     }
 
+
+
     @Override
     public double getLifeSpan() {
         int gender = user.getGender();
@@ -52,4 +55,6 @@ public class Cocoo implements LifeSpanCalculator {
             default: return (defaultFemaleLifeSpan + defaultMaleLifeSpan) / 2;
         }
     }
+
+
 }

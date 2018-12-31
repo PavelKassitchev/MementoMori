@@ -29,8 +29,7 @@ public class AndroidUserHandler implements UserHandler{
         String userString = sPrefs.getString(MainActivity.USER, null);
         if (userString == null) {
             User user = new AndroidUser();
-            user.setBirthDate(new Date());
-            String userName = MainActivity.getAppContext().getString(R.string.default_username);
+            user.init();
             return user;
         }
         return gson.fromJson(userString, User.class);
@@ -45,5 +44,11 @@ public class AndroidUserHandler implements UserHandler{
         double ratio = (initialLifeSpan - currentAge) / initialLifeSpan;
         double correction = lifeSpanCalculator.getCorrection();
         return initialLifeSpan + ratio * correction;
+    }
+
+    @Override
+    public Date getLastDate(User user) {
+        long spanInMillis = user.getBirthDate().getTime() + (long)(calculateLifeSpan(user) * LifeSpanCalculator.MILLIS_IN_YEAR);
+        return new Date(spanInMillis);
     }
 }

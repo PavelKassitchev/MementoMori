@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Memento</string>
 
-    <string name="button_text">Пройдите опрос</string>
     <string name="default_username">Пользователь</string>
     <string name="hello">Здравствуйте, </string>
     <string name="info">В среднем человек вашего возраста и привычек доживет до: </string>

@@ -6,13 +6,19 @@ import java.util.Date;
 
 public class AndroidUser implements User {
 
-    public static final int MALE = 1;
-    public static final int FEMALE = 2;
 
     private String name;
     private int gender;
     private Date birthDate;
     private int[] userData;
+
+    @Override
+    public void init() {
+        name = MainActivity.getAppContext().getString(R.string.default_username);
+        gender = 0;
+        birthDate = new Date();
+        userData = new int[Questions.getLength()];
+    }
 
     public int getGender() {
         return gender;
