@@ -12,7 +12,7 @@ public class AndroidUser implements User {
     private Date birthDate;
     private int[] userData;
 
-    //TODO replace init() with Constractor
+    //TODO replace init() with Constructor
 
     @Override
     public void init() {
