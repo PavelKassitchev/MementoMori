@@ -1,9 +1,5 @@
 package com.example.pavka.memento;
 
-import com.example.pavka.memento.LifeSpanCalculator;
-import com.example.pavka.memento.Questions;
-import com.example.pavka.memento.User;
-
 
 import java.util.Date;
 
@@ -51,8 +47,8 @@ public class Cocoo implements LifeSpanCalculator {
         double defaultFemaleLifeSpan = 0.0000624 * Math.pow(ageInYears, 3) - 0.00532 * Math.pow(ageInYears, 2) + 0.157 * ageInYears + AVG_FEMALE;
 
         switch (gender) {
-            case User.MALE: return defaultMaleLifeSpan;
-            case User.FEMALE: return defaultFemaleLifeSpan;
+            case AndroidUser.MALE: return defaultMaleLifeSpan;
+            case AndroidUser.FEMALE: return defaultFemaleLifeSpan;
             default: return (defaultFemaleLifeSpan + defaultMaleLifeSpan) / 2;
         }
     }

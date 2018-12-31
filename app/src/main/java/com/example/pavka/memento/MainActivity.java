@@ -1,6 +1,7 @@
 package com.example.pavka.memento;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -14,15 +15,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static SharedPreferences sPrefs;
     private final static String STORE_NAME = "store";
+    private static Context context;
 
-    public static SharedPreferences getsPrefs() {
+    public static SharedPreferences getPrefs() {
         return sPrefs;
     }
+    public static Context getAppContext() { return context; }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sPrefs = getSharedPreferences(STORE_NAME, MODE_PRIVATE);
+        context = getApplicationContext();
 
     }
     @Override

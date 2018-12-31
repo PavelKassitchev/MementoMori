@@ -4,11 +4,13 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 
+import java.util.Date;
+
 public class AndroidUserHandler implements UserHandler{
 
 
 
-    private SharedPreferences sPrefs = MainActivity.getsPrefs();
+    private SharedPreferences sPrefs = MainActivity.getPrefs();;
     private Gson gson = new Gson();
     private LifeSpanCalculator lifeSpanCalculator;
 
@@ -23,10 +25,14 @@ public class AndroidUserHandler implements UserHandler{
 
     }
     @Override
-    public User extractUser() {
-        sPrefs = MainActivity.getsPrefs();
+    public User obtainUser() {
         String userString = sPrefs.getString(MainActivity.USER, null);
-        //TODO if null?
+        if (userString == null) {
+            User user = new AndroidUser();
+            user.setBirthDate(new Date());
+            String userName = MainActivity.getAppContext().getString(R.string.default_username);
+            return user;
+        }
         return gson.fromJson(userString, User.class);
     }
 

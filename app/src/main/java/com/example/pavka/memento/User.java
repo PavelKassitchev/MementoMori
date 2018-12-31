@@ -1,39 +1,23 @@
 package com.example.pavka.memento;
 
-
 import java.util.Date;
 
+public interface User {
+    public int getGender();
 
-public class User {
+    public void setGender(int gender);
 
-    public static final int MALE = 1;
-    public static final int FEMALE = 2;
+    public Date getBirthDate();
 
-    private int gender;
-    private Date birthDate;
-    private int[] userData;
 
-    public int getGender() {
-        return gender;
-    }
+    public void setBirthDate(Date birthDate);
 
-    public void setGender(int gender) {
-        this.gender = gender;
-    }
 
-    public Date getBirthDate() {
-        return birthDate;
-    }
+    public int[] getUserData();
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
+    public void setUserData(int[] userData);
 
-    public int[] getUserData() {
-        return userData;
-    }
+    public String getName();
 
-    public void setUserData(int[] userData) {
-        this.userData = userData;
-    }
+    public void setName(String name);
 }
