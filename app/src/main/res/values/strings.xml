@@ -3,6 +3,12 @@
 
     <string name="button_text">Пройдите опрос</string>
     <string name="default_username">Пользователь</string>
+    <string name="hello">Здравствуйте, </string>
+    <string name="info">В среднем человек вашего возраста и привычек доживет до: </string>
+    <string name="count">Счетчик не установлен</string>
+    <string name="quest">Перейти к анкете</string>
+    <string name="track">Закрепить привычку</string>
+    <string name="clean">Сброс</string>
 
 
 </resources>
