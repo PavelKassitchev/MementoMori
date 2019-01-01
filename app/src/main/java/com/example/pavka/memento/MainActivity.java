@@ -42,7 +42,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         userHandler = new AndroidUserHandler();
 
-        user = userHandler.obtainUser();
+        try {
+            user = userHandler.obtainUser();
+        } catch (Exception e) {
+            user = userHandler.cleanUser();
+        }
 
         textHello = (TextView)findViewById(R.id.textHello);
         textCount = (TextView)findViewById(R.id.textCount);
@@ -76,18 +80,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 user.setBirthDate(birthDate);
                 updateView(user);
-                userHandler.saveUser(user);
+                try {
+                    userHandler.saveUser(user);
+                } catch (Exception e) {
+                    //TODO process Exception and maybe re-organize the method
+                    e.printStackTrace();
+                }
 
             /*Intent intent = new Intent(this, QuestionnaireActivity.class);
             startActivityForResult(intent, 1);*/
             break;
             case R.id.clean:
-                //TODO recheck it!
+                //TODO recheck it! Handler.clean()?
                 user = new AndroidUser();
-                user.init();
                 updateView(user);
-                userHandler.saveUser(user);
+                try {
+                    userHandler.saveUser(user);
+                } catch (Exception e) {
+                    //TODO process Exception
+                    e.printStackTrace();
+                }
         }
+
     }
 
     @Override
