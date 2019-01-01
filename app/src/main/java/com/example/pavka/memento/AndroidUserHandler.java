@@ -10,9 +10,8 @@ public class AndroidUserHandler implements UserHandler{
 
 
 
-    private SharedPreferences sPrefs = MainActivity.getPrefs();;
+    private SharedPreferences sPrefs = MainActivity.getPrefs();
     private Gson gson = new Gson();
-    private Cocoo cocoo;
 
     @Override
     public void saveUser(User user)
@@ -28,9 +27,7 @@ public class AndroidUserHandler implements UserHandler{
     public User obtainUser() {
         String userString = sPrefs.getString(MainActivity.USER, null);
         if (userString == null) {
-            User user = new AndroidUser();
-
-            return user;
+            return new AndroidUser();
         }
         return gson.fromJson(userString, AndroidUser.class);
     }
@@ -38,7 +35,7 @@ public class AndroidUserHandler implements UserHandler{
    //TODO Correction coefficient?
   @Override
     public double calculateLifeSpan(User user) {
-        cocoo = new AndroidCocoo(user);
+      Cocoo cocoo = new AndroidCocoo(user);
         double initialLifeSpan = cocoo.getLifeSpan();
         double currentAge = cocoo.getCurrentAge();
         double ratio = (initialLifeSpan - currentAge) / initialLifeSpan;

@@ -18,8 +18,7 @@ public class AndroidCocoo implements Cocoo {
     public double getCurrentAge() {
         Date birthDate = user.getBirthDate();
         Date today = new Date();
-        double currentAge = (today.getTime() - birthDate.getTime()) / MILLIS_IN_YEAR;
-        return currentAge;
+        return (today.getTime() - birthDate.getTime()) / MILLIS_IN_YEAR;
     }
 
     @Override
@@ -33,8 +32,6 @@ public class AndroidCocoo implements Cocoo {
                 case 1:
                     correction += Questions.getPositives()[i];
                     break;
-                default:
-                    continue;
             }
         }
         return correction;

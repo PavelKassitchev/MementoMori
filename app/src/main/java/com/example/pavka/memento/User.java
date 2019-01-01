@@ -3,26 +3,26 @@ package com.example.pavka.memento;
 import java.util.Date;
 
 public interface User {
-    public static final int MALE = 1;
-    public static final int FEMALE = 2;
+    int MALE = 1;
+    int FEMALE = 2;
 
     //TODO wht for User, what for Handler?
 
-    public int getGender();
+    int getGender();
 
-    public void setGender(int gender);
+    void setGender(int gender);
 
-    public Date getBirthDate();
-
-
-    public void setBirthDate(Date birthDate);
+    Date getBirthDate();
 
 
-    public int[] getUserData();
+    void setBirthDate(Date birthDate);
 
-    public void setUserData(int[] userData);
 
-    public String getName();
+    int[] getUserData();
 
-    public void setName(String name);
+    void setUserData(int[] userData);
+
+    String getName();
+
+    void setName(String name);
 }

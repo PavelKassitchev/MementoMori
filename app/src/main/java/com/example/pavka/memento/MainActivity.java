@@ -4,7 +4,6 @@ package com.example.pavka.memento;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.service.autofill.TextValueSanitizer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static SharedPreferences sPrefs;
     private final static String STORE_NAME = "store";
+    //TODO "static" is a bad idea...
     private static Context context;
     private UserHandler userHandler;
     private User user;
@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             user = userHandler.cleanUser();
         }
 
-        textHello = (TextView)findViewById(R.id.textHello);
-        textCount = (TextView)findViewById(R.id.textCount);
+        textHello = findViewById(R.id.textHello);
+        textCount = findViewById(R.id.textCount);
         updateView(user);
 
     }
