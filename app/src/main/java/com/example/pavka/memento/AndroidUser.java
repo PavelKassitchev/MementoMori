@@ -1,5 +1,6 @@
 package com.example.pavka.memento;
 
+import android.content.Context;
 
 import java.util.Date;
 
@@ -13,8 +14,8 @@ public class AndroidUser implements User {
     private int[] userData;
 
 
-    public AndroidUser() {
-        name = MainActivity.getAppContext().getString(R.string.default_username);
+    public AndroidUser(Context context) {
+        name = context.getString(R.string.default_username);
         gender = 0;
         birthDate = new Date();
         userData = new int[Questions.getLength()];

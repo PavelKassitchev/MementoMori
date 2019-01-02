@@ -5,10 +5,6 @@ import java.util.Date;
 
 public class AndroidCocoo implements Cocoo {
 
-    public final double AVG_MALE = 68.583;
-    public final double AVG_FEMALE = 77.953;
-
-
     private User user;
 
     public AndroidCocoo(User user) {

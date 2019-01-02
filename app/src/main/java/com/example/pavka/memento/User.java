@@ -6,17 +6,13 @@ public interface User {
     int MALE = 1;
     int FEMALE = 2;
 
-    //TODO wht for User, what for Handler?
-
     int getGender();
 
     void setGender(int gender);
 
     Date getBirthDate();
 
-
     void setBirthDate(Date birthDate);
-
 
     int[] getUserData();
 
