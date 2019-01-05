@@ -8,6 +8,9 @@
     <string name="quest">Перейти к анкете</string>
     <string name="track">Закрепить привычку</string>
     <string name="clean">Сброс</string>
+    <string name="q_invite">ДЛЯ ЗАПУСКА СЧЕТЧИКА ОТВЕТЬТЕ НА ВОПРОСЫ АНКЕТЫ</string>
+    <string name="buttonNext">ДАЛЕЕ</string>
+    <string name="buttonBack">НАЗАД</string>
 
 
 </resources>

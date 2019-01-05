@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -18,10 +17,12 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     public final static String USER = "user";
+    private final static int REQ_CODE_Q = 1;
+    private final static int REQ_CODE_T = 2;
 
     private static SharedPreferences sPrefs;
     private final static String STORE_NAME = "store";
-    
+
 
     private UserHandler userHandler;
     private User user;
@@ -65,10 +66,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        Intent intent = null;
         switch (v.getId()) {
             case R.id.buttonQ:
                 //TODO change this mocking method to real one
-                user.setName("Павел");
+                /*user.setName("Павел");
                 user.setGender(User.MALE);
                 DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
                 Date birthDate = null;
@@ -84,15 +86,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } catch (Exception e) {
                     //TODO process Exception and maybe re-organize the method
                     e.printStackTrace();
-                }
+                }*/
 
-            /*Intent intent = new Intent(this, QuestionnaireActivity.class);
-            startActivityForResult(intent, 1);*/
+                intent = new Intent(this, QuestionnaireActivity.class);
+                startActivityForResult(intent, REQ_CODE_Q);
+
             break;
             case R.id.clean:
                 user = userHandler.cleanUser();
                 updateView(user);
-
+                break;
+                //TODO buttonT
+            case R.id.buttonT:
+                intent = new Intent(this, EventTrackerActivity.class);
+                startActivityForResult(intent, REQ_CODE_T);
         }
 
     }
@@ -102,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public void updateView(User user) {
+    private void updateView(User user) {
 
         String invitation = getString(R.string.hello) + " " + user.getName() + "!";
         textHello.setText(invitation);
