@@ -11,8 +11,17 @@
     <string name="q_invite">ДЛЯ ЗАПУСКА СЧЕТЧИКА ОТВЕТЬТЕ НА ВОПРОСЫ АНКЕТЫ</string>
     <string name="buttonNext">ДАЛЕЕ</string>
     <string name="buttonBack">НАЗАД</string>
-
-
+    <string name="textName">Введите Ваше имя</string>
+    <string name="editName">Имя</string>
+    <string name="textGender">Ваш пол</string>
+    <string name="male">Муж</string>
+    <string name="female">Жен</string>
+    <string name="transgender">Еще не решило</string>
+    <string name="textDate">Введите дату Вашего рождения</string>
+    <string name="editDate">дд.мм.гггг</string>
+    <string name="yes">ДА</string>
+    <string name="no">НЕТ</string>
+    <string name="amnesia">Не помню</string>
 
 
 </resources>

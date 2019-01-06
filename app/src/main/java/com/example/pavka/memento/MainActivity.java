@@ -20,15 +20,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final static int REQ_CODE_Q = 1;
     private final static int REQ_CODE_T = 2;
 
-    private static SharedPreferences sPrefs;
-    private final static String STORE_NAME = "store";
+    private SharedPreferences sPrefs;
+    public final static String STORE_NAME = "store";
 
 
     private UserHandler userHandler;
     private User user;
     private TextView textHello, textCount;
 
-    public static SharedPreferences getPrefs() {
+    public SharedPreferences getPrefs() {
         return sPrefs;
     }
 
@@ -69,24 +69,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = null;
         switch (v.getId()) {
             case R.id.buttonQ:
-                //TODO change this mocking method to real one
-                /*user.setName("Павел");
-                user.setGender(User.MALE);
-                DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
-                Date birthDate = null;
-                try {
-                    birthDate = formatter.parse("22.11.1968");
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                user.setBirthDate(birthDate);
-                updateView(user);
-                try {
-                    userHandler.saveUser(user);
-                } catch (Exception e) {
-                    //TODO process Exception and maybe re-organize the method
-                    e.printStackTrace();
-                }*/
 
                 intent = new Intent(this, QuestionnaireActivity.class);
                 startActivityForResult(intent, REQ_CODE_Q);
@@ -106,6 +88,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onActivityResult(int request, int response, Intent intent) {
+        try {
+            user = userHandler.obtainUser();
+        } catch (Exception e) {
+            user = userHandler.cleanUser();
+        }
+        updateView(user);
 
     }
 

@@ -7,33 +7,46 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 
 public class QuestionnaireActivity extends AppCompatActivity {
     private SharedPreferences pref;
     private int page;
     private final int LAST_PAGE = Questions.getLength();
+    private final String PAGE = "page";
     private NameFragment nameFragment;
     private DataFragment dataFragment;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
+    private TextView tv;
+    private UserHandler userHandler;
+    private int[] data = new int[LAST_PAGE];
+    private User user;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionnaire);
+        tv = findViewById(R.id.test_count);
 
-        pref = getPreferences(MODE_PRIVATE);
+        pref = getSharedPreferences(MainActivity.STORE_NAME, MODE_PRIVATE);
+        userHandler = new AndroidUserHandler(this);
+        try {
+            user = userHandler.obtainUser();
+        } catch (Exception e) {
+            user = userHandler.cleanUser();
+        }
         fragmentManager = getSupportFragmentManager();
         page = obtainPage();
         setFragment(page);
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onPause() {
         savePage(page);
-        super.onDestroy();
+        super.onPause();
 
     }
 
@@ -61,6 +74,7 @@ public class QuestionnaireActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frgmtContainer, dataFragment);
         fragmentTransaction.commit();
         dataFragment.setPage(page);
+        tv.setText(page + "/" + LAST_PAGE);
     }
 
     public void onClick(View view) {
@@ -73,10 +87,12 @@ public class QuestionnaireActivity extends AppCompatActivity {
                     if (page ==1) {
                         setNameFragment();
                         page--;
+                        tv.setText("");
                     }
                     else {
                         dataFragment.setPage(--page);
                         dataFragment.update();
+                        tv.setText(page + "/" + LAST_PAGE);
                     }
                 }
                 break;
@@ -84,17 +100,27 @@ public class QuestionnaireActivity extends AppCompatActivity {
             case R.id.button_next:
                 if (page == LAST_PAGE) {
                     page = 0;
+                    user.setUserData(data);
+                    try {
+                        userHandler.saveUser(user);
+                    } catch (Exception e) {
+                        userHandler.cleanUser();
+                    }
                     Intent intent = new Intent();
                     setResult(RESULT_OK, intent);
                     finish();
                 }
                 else {
                     if (page == 0) {
+                        user.setName(nameFragment.getName());
+                        user.setGender(nameFragment.getGender());
+                        user.setBirthDate(nameFragment.getBirthDate());
                         setDataFragment(++page);
                     }
                     else {
                         dataFragment.setPage(++page);
                         dataFragment.update();
+                        tv.setText(page + "/" + LAST_PAGE);
                     }
 
                 }
@@ -103,7 +129,7 @@ public class QuestionnaireActivity extends AppCompatActivity {
 
     private void savePage(int page) {
         SharedPreferences.Editor editor = pref.edit();
-        editor.putInt("page", page);
+        editor.putInt(PAGE, page);
         editor.apply();
 
     }

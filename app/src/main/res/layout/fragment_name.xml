@@ -1,14 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NameFragment">
+    android:orientation="vertical"
+    tools:context=".NameFragment"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/textName"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="NAME" />
+        android:layout_height="wrap_content"
+        android:text="@string/textName"
+        android:textStyle="bold"
+        android:textAlignment="center"/>
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/editName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="@string/editName" />
+
+    <TextView
+        android:id="@+id/textGender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/textGender"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/genderGroup"
+        >
+
+        <RadioButton
+            android:id="@+id/radioM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_weight="2.8"
+            android:text="@string/male"
+            />
+
+        <RadioButton
+            android:id="@+id/radioF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/female" />
+
+        <RadioButton
+            android:id="@+id/radioN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="@string/transgender" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/textDate"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        />
+
+    <EditText
+        android:id="@+id/editDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:hint="@string/editDate"
+        />
+
+
+</LinearLayout>

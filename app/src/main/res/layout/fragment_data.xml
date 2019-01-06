@@ -6,15 +6,51 @@
     tools:context=".DataFragment"
     android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="DATA" />
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:padding="8dp"/>
 
-    <TextView
+
+    <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/test_count"
-        android:text="" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="24dp"
+        android:id="@+id/radioGroup"
+
+
+        >
+
+        <RadioButton
+            android:id="@+id/radioY"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_weight="3"
+            android:text="@string/yes" />
+
+        <RadioButton
+            android:id="@+id/radioN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/no"
+            />
+
+        <RadioButton
+            android:id="@+id/radioX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="@string/amnesia"
+            android:textAlignment="center" />
+
+    </RadioGroup>
+
+
 </LinearLayout>

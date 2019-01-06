@@ -11,13 +11,15 @@ public class AndroidUserHandler implements UserHandler{
 
 
 
-    private SharedPreferences sPrefs = MainActivity.getPrefs();
+    private SharedPreferences sPrefs;
     private Gson gson = new Gson();
     private Context context;
     private final double CORRECTION_COEFFICIENT = 1.0;
 
     public AndroidUserHandler(Context context) {
+
         this.context = context;
+        sPrefs = context.getSharedPreferences(MainActivity.STORE_NAME, Context.MODE_PRIVATE);
     }
 
     @Override

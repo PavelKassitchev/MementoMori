@@ -12,8 +12,10 @@ import android.widget.TextView;
 
 public class DataFragment extends Fragment {
 
-    private TextView test;
+    private TextView textView;
     private int page;
+    private final String[] QUESTIONS = Questions.getQuestions();
+    private final int LAST_PAGE = Questions.getLength();
 
     public DataFragment() {
         // Required empty public constructor
@@ -30,9 +32,9 @@ public class DataFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View v = inflater.inflate(R.layout.fragment_data, container, false);
-        test = v.findViewById(R.id.test_count);
+        textView = v.findViewById(R.id.textView);
         update();
         return v;
     }
@@ -56,6 +58,6 @@ public class DataFragment extends Fragment {
     }
 
     public void update() {
-        test.setText(""+page);
+        textView.setText(QUESTIONS[page - 1]);
     }
 }
