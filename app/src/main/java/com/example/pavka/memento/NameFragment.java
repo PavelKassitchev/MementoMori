@@ -61,7 +61,11 @@ public class NameFragment extends Fragment {
 
     public String getName() {
 
-        return editName.getText().toString();
+        String name = editName.getText().toString();
+        if (name == null || name.isEmpty()) {
+            return getActivity().getString(R.string.default_username);
+        }
+        return name;
     }
 
     public int getGender() {
@@ -81,7 +85,7 @@ public class NameFragment extends Fragment {
         try {
             date = formatter.parse(editDate.getText().toString());
         } catch (ParseException e) {
-            e.printStackTrace();
+            date = new Date();
         }
 
         return date;
