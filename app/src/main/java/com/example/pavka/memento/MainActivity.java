@@ -2,8 +2,9 @@ package com.example.pavka.memento;
 
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -55,14 +56,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        Intent intent = null;
+        final Intent intent;
         switch (v.getId()) {
             case R.id.buttonQ:
 
                 intent = new Intent(this, QuestionnaireActivity.class);
-                startActivityForResult(intent, REQ_CODE_Q);
-
-            break;
+                AlertDialog.Builder builder = new AlertDialog.Builder((this));
+                builder.setTitle(R.string.dialog_title_Q).setMessage(R.string.dialog_message_Q).setCancelable(false);
+                builder.setNegativeButton(R.string.dialog_negative, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        boolean isShown = false;
+                        intent.putExtra("isShown", isShown);
+                        startActivityForResult(intent, REQ_CODE_Q);
+                    }
+                });
+                builder.setPositiveButton(R.string.dialog_positive, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        boolean isShown = true;
+                        intent.putExtra("isShown", isShown);
+                        startActivityForResult(intent, REQ_CODE_Q);
+                    }
+                });
+                builder.create().show();
+                break;
             case R.id.clean:
                 user = userHandler.cleanUser();
                 updateView(user);

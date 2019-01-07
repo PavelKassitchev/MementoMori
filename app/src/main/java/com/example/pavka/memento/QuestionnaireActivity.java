@@ -7,7 +7,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class QuestionnaireActivity extends AppCompatActivity {
@@ -23,6 +27,8 @@ public class QuestionnaireActivity extends AppCompatActivity {
     private UserHandler userHandler;
     private int[] data = new int[LAST_PAGE];
     private User user;
+    private Button buttonNext;
+    boolean isShown;
 
 
     @Override
@@ -30,6 +36,9 @@ public class QuestionnaireActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionnaire);
         tv = findViewById(R.id.test_count);
+        buttonNext = findViewById(R.id.button_next);
+        Intent intent = getIntent();
+        isShown = intent.getBooleanExtra("isShown", false);
 
         pref = getSharedPreferences(MainActivity.STORE_NAME, MODE_PRIVATE);
         userHandler = new AndroidUserHandler(this);
@@ -45,6 +54,12 @@ public class QuestionnaireActivity extends AppCompatActivity {
         }
         fragmentManager = getSupportFragmentManager();
         page = obtainPage();
+        //setFragment(page);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         setFragment(page);
     }
 
@@ -68,6 +83,7 @@ public class QuestionnaireActivity extends AppCompatActivity {
 
         if (page == 0) {
             setNameFragment();
+            if (isShown) setIdentity();
         }
         else {
             setDataFragment(page);
@@ -80,6 +96,26 @@ public class QuestionnaireActivity extends AppCompatActivity {
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frgmtContainer, nameFragment);
         fragmentTransaction.commit();
+
+    }
+
+    private void setIdentity() {
+        if (!user.getName().equals(getString(R.string.default_username))) {
+            nameFragment.getEditName().setText(user.getName());
+        }
+        switch (user.getGender()) {
+            case User.MALE:
+                nameFragment.getGenderGroup().check(R.id.radioM);
+                break;
+            case User.FEMALE:
+                nameFragment.getGenderGroup().check(R.id.radioF);
+        }
+        if ((new Date().getTime() - user.getBirthDate().getTime()) > 100000) {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+            String birthday = formatter.format(user.getBirthDate());
+            nameFragment.getEditDate().setText(birthday);
+        }
+
     }
 
     private void setDataFragment(int page) {
@@ -98,15 +134,30 @@ public class QuestionnaireActivity extends AppCompatActivity {
                     finish();
                 }
                 else {
-                    if (page ==1) {
+                    if (page == 1) {
                         setNameFragment();
                         page--;
                         tv.setText("");
                     }
                     else {
+                        if (page == LAST_PAGE) {
+                            buttonNext.setText(R.string.buttonNext);
+                        }
+
                         dataFragment.setPage(--page);
                         dataFragment.update();
                         tv.setText(page + "/" + LAST_PAGE);
+                        switch(data[page - 1]) {
+                            case -1:
+                                dataFragment.rGroup.check(R.id.radioN);
+                                break;
+                            case 0:
+                                dataFragment.rGroup.check(R.id.radioX);
+                                break;
+                            case 1:
+                                dataFragment.rGroup.check(R.id.radioY);
+                                break;
+                        }
                     }
                 }
                 break;
@@ -138,6 +189,9 @@ public class QuestionnaireActivity extends AppCompatActivity {
                         setDataFragment(++page);
                     }
                     else {
+                        if (page == LAST_PAGE - 1) {
+                            buttonNext.setText(R.string.buttonFinish);
+                        }
                         data[page - 1] = dataFragment.getData();
                         dataFragment.setPage(++page);
                         dataFragment.update();

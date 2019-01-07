@@ -17,9 +17,21 @@ import java.util.Date;
 
 public class NameFragment extends Fragment {
 
-    private EditText editName;
-    private RadioGroup genderGroup;
-    private EditText editDate;
+    public EditText getEditName() {
+        return editName;
+    }
+
+    public RadioGroup getGenderGroup() {
+        return genderGroup;
+    }
+
+    public EditText getEditDate() {
+        return editDate;
+    }
+
+    EditText editName;
+    RadioGroup genderGroup;
+    EditText editDate;
 
 
     public NameFragment() {
@@ -90,4 +102,6 @@ public class NameFragment extends Fragment {
 
         return date;
     }
+
+
 }

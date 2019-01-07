@@ -17,7 +17,7 @@ public class DataFragment extends Fragment {
     private int page;
     private final String[] QUESTIONS = Questions.getQuestions();
     private final int LAST_PAGE = Questions.getLength();
-    private RadioGroup rGroup;
+    RadioGroup rGroup;
 
     public DataFragment() {
         // Required empty public constructor

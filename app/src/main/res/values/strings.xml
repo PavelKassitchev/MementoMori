@@ -22,6 +22,11 @@
     <string name="yes">ДА</string>
     <string name="no">НЕТ</string>
     <string name="amnesia">Не помню</string>
+    <string name="buttonFinish">ГОТОВО</string>
+    <string name="dialog_title_Q">Переход к анкете</string>
+    <string name="dialog_message_Q">Показывать предыдущие ответы?</string>
+    <string name="dialog_negative">нет</string>
+    <string name="dialog_positive">да</string>
 
 
 </resources>
