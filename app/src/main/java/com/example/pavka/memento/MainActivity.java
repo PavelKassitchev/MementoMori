@@ -17,10 +17,11 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     public final static String USER = "user";
+    public final static String ANSWRES = "answers";
     private final static int REQ_CODE_Q = 1;
     private final static int REQ_CODE_T = 2;
 
-    private SharedPreferences sPrefs;
+
     public final static String STORE_NAME = "store";
 
 
@@ -28,16 +29,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private User user;
     private TextView textHello, textCount;
 
-    public SharedPreferences getPrefs() {
-        return sPrefs;
-    }
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        sPrefs = getSharedPreferences(STORE_NAME, MODE_PRIVATE);
 
         textHello = findViewById(R.id.textHello);
         textCount = findViewById(R.id.textCount);
@@ -53,16 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         updateView(user);
 
     }
-    @Override
-    protected void onStart() {
-        super.onStart();
 
-    }
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-    }
 
     @Override
     public void onClick(View v) {

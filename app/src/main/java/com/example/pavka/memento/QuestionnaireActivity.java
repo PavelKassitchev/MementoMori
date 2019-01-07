@@ -38,6 +38,11 @@ public class QuestionnaireActivity extends AppCompatActivity {
         } catch (Exception e) {
             user = userHandler.cleanUser();
         }
+        try {
+            data = userHandler.obtainUserAnswers();
+        } catch (Exception e) {
+            data = new int[LAST_PAGE];
+        }
         fragmentManager = getSupportFragmentManager();
         page = obtainPage();
         setFragment(page);
@@ -46,8 +51,17 @@ public class QuestionnaireActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         savePage(page);
+        try {
+            userHandler.saveUserAnswers(data);
+        } catch (Exception e) {
+            //TODO Exception processing
+        }
         super.onPause();
 
+    }
+
+    public int getPage() {
+        return page;
     }
 
     private void setFragment(int page) {
@@ -99,6 +113,7 @@ public class QuestionnaireActivity extends AppCompatActivity {
 
             case R.id.button_next:
                 if (page == LAST_PAGE) {
+                    data[LAST_PAGE - 1] = dataFragment.getData();
                     page = 0;
                     user.setUserData(data);
                     try {
@@ -115,9 +130,15 @@ public class QuestionnaireActivity extends AppCompatActivity {
                         user.setName(nameFragment.getName());
                         user.setGender(nameFragment.getGender());
                         user.setBirthDate(nameFragment.getBirthDate());
+                        try {
+                            userHandler.saveUser(user);
+                        } catch (Exception e) {
+                            user = userHandler.cleanUser();
+                        }
                         setDataFragment(++page);
                     }
                     else {
+                        data[page - 1] = dataFragment.getData();
                         dataFragment.setPage(++page);
                         dataFragment.update();
                         tv.setText(page + "/" + LAST_PAGE);
@@ -127,6 +148,8 @@ public class QuestionnaireActivity extends AppCompatActivity {
         }
     }
 
+
+
     private void savePage(int page) {
         SharedPreferences.Editor editor = pref.edit();
         editor.putInt(PAGE, page);
@@ -134,7 +157,7 @@ public class QuestionnaireActivity extends AppCompatActivity {
 
     }
     private int obtainPage() {
-        page = pref.getInt("page", 0);
+        page = pref.getInt(PAGE, 0);
         return page;
     }
 }
