@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private UserHandler userHandler;
     private User user;
     private TextView textHello, textCount;
+    private boolean isNewUser;
 
 
 
@@ -46,6 +47,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         try {
             user = userHandler.obtainUser();
+            if (user == null) {
+                isNewUser = true;
+                throw new Exception();
+            }
         } catch (Exception e) {
             user = userHandler.cleanUser();
         }
@@ -62,27 +67,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.buttonQ:
 
                 intent = new Intent(this, QuestionnaireActivity.class);
-                AlertDialog.Builder builder = new AlertDialog.Builder((this));
-                builder.setTitle(R.string.dialog_title_Q).setMessage(R.string.dialog_message_Q).setCancelable(false);
-                builder.setNegativeButton(R.string.dialog_negative, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        intent.putExtra("isShown", false);
-                        startActivityForResult(intent, REQ_CODE_Q);
-                    }
-                });
-                builder.setPositiveButton(R.string.dialog_positive, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        intent.putExtra("isShown", true);
-                        startActivityForResult(intent, REQ_CODE_Q);
-                    }
-                });
-                builder.create().show();
+                if (isNewUser) {
+                    startActivityForResult(intent, REQ_CODE_T);
+                }
+                else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder((this));
+
+                    builder.setTitle(R.string.dialog_title_Q).setMessage(R.string.dialog_message_Q).setCancelable(false);
+                    builder.setNegativeButton(R.string.dialog_negative, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            intent.putExtra("isShown", false);
+                            startActivityForResult(intent, REQ_CODE_Q);
+                        }
+                    });
+                    builder.setPositiveButton(R.string.dialog_positive, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            intent.putExtra("isShown", true);
+                            startActivityForResult(intent, REQ_CODE_Q);
+                        }
+                    });
+                    builder.create().show();
+                }
                 break;
             case R.id.clean:
                 user = userHandler.cleanUser();
                 updateView(user);
+                isNewUser = true;
                 break;
                 //TODO buttonT
             case R.id.buttonT:
@@ -96,6 +108,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onActivityResult(int request, int response, Intent intent) {
         try {
             user = userHandler.obtainUser();
+            isNewUser = false;
+            if (user == null) {
+                isNewUser = true;
+                throw new Exception();
+            }
         } catch (Exception e) {
             user = userHandler.cleanUser();
         }

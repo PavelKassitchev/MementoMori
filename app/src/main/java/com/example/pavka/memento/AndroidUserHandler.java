@@ -40,12 +40,10 @@ public class AndroidUserHandler implements UserHandler{
 
     }
     @Override
-    public User obtainUser() {
+    public User obtainUser() throws Exception {
         String userType = isTempUser? MainActivity.TEMP_USER : MainActivity.USER;
         String userString = sPrefs.getString(userType, null);
-        if (userString == null) {
-            return new AndroidUser(context);
-        }
+
         return gson.fromJson(userString, AndroidUser.class);
     }
 

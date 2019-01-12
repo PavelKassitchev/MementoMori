@@ -28,7 +28,8 @@ public class QuestionnaireActivity extends AppCompatActivity {
 
     private User user;
     private Button buttonNext;
-    boolean isShown;
+    private boolean isShown;
+    private Intent intent;
 
 
     @Override
@@ -37,13 +38,13 @@ public class QuestionnaireActivity extends AppCompatActivity {
         setContentView(R.layout.activity_questionnaire);
         tv = findViewById(R.id.test_count);
         buttonNext = findViewById(R.id.button_next);
-        Intent intent = getIntent();
+        intent = getIntent();
         isShown = intent.getBooleanExtra("isShown", false);
 
         pref = getSharedPreferences(MainActivity.STORE_NAME, MODE_PRIVATE);
         userHandler = new AndroidUserHandler(this);
 
-
+        ((AndroidUserHandler) userHandler).setTempUser(true);
         if (isShown) {
             try {
                 user = userHandler.obtainUser();
@@ -54,7 +55,6 @@ public class QuestionnaireActivity extends AppCompatActivity {
         } else {
             user = new AndroidUser(this);
         }
-        ((AndroidUserHandler) userHandler).setTempUser(true);
 
         fragmentManager = getSupportFragmentManager();
         page = obtainPage();
@@ -62,8 +62,11 @@ public class QuestionnaireActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    public void onBackPressed() {
+        page = 0;
+        savePage(page);
+        
+        super.onBackPressed();
 
     }
 
@@ -72,6 +75,7 @@ public class QuestionnaireActivity extends AppCompatActivity {
         savePage(page);
         try {
             userHandler.saveUser(user);
+            intent.putExtra("isShown", true);
         } catch (Exception e) {
             //TODO Exception processing
         }
@@ -146,9 +150,7 @@ public class QuestionnaireActivity extends AppCompatActivity {
                             case -1:
                                 dataFragment.rGroup.check(R.id.radioN);
                                 break;
-                            case 0:
-                                dataFragment.rGroup.check(R.id.radioX);
-                                break;
+
                             case 1:
                                 dataFragment.rGroup.check(R.id.radioY);
                                 break;
@@ -162,6 +164,11 @@ public class QuestionnaireActivity extends AppCompatActivity {
                     user.setReply(LAST_PAGE - 1, dataFragment.getData());
                     page = 0;
                     isShown = false;
+                    try {
+                        userHandler.saveUser(user);
+                    } catch (Exception e) {
+                        userHandler.cleanUser();
+                    }
                     ((AndroidUserHandler)userHandler).setTempUser(false);
                     try {
                         userHandler.saveUser(user);

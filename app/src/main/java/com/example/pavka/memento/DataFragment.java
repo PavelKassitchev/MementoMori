@@ -19,7 +19,7 @@ public class DataFragment extends Fragment {
     private final int LAST_PAGE = Questions.getLength();
     RadioGroup rGroup;
     private User user;
-    private boolean isShown;
+
 
     public DataFragment() {
         // Required empty public constructor
@@ -36,7 +36,7 @@ public class DataFragment extends Fragment {
         rGroup = v.findViewById(R.id.radioGroup);
         page = ((QuestionnaireActivity)getActivity()).getPage();
         user = ((QuestionnaireActivity)getActivity()).getUser();
-        isShown = ((QuestionnaireActivity)getActivity()).isShown;
+
         update();
         return v;
     }
@@ -50,22 +50,18 @@ public class DataFragment extends Fragment {
     public void update() {
 
         textView.setText(QUESTIONS[page - 1]);
-        if (isShown) {
+        rGroup.clearCheck();
+
             switch(user.getReply(page -1 )) {
                 case -1:
                     rGroup.check(R.id.radioN);
                     break;
-                case 0:
-                    rGroup.check(R.id.radioX);
-                    break;
+
                 case 1:
                     rGroup.check(R.id.radioY);
                     break;
             }
-        }
-        else {
-            rGroup.clearCheck();
-        }
+
     }
 
     public int getData() {
