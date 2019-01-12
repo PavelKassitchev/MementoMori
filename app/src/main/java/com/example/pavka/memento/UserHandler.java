@@ -8,6 +8,7 @@ public interface UserHandler {
     User cleanUser();
     void saveUserAnswers(int[] answers) throws Exception;
     int[] obtainUserAnswers() throws  Exception;
+    User copyUser(User user);
     double calculateLifeSpan(User user);
     Date getLastDate(User user);
 

@@ -18,7 +18,8 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     public final static String USER = "user";
-    public final static String ANSWRES = "answers";
+    public final static String TEMP_USER = "tempUser";
+    public final static String ANSWERS = "answers";
     private final static int REQ_CODE_Q = 1;
     private final static int REQ_CODE_T = 2;
 
@@ -66,16 +67,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 builder.setNegativeButton(R.string.dialog_negative, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        boolean isShown = false;
-                        intent.putExtra("isShown", isShown);
+                        intent.putExtra("isShown", false);
                         startActivityForResult(intent, REQ_CODE_Q);
                     }
                 });
                 builder.setPositiveButton(R.string.dialog_positive, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        boolean isShown = true;
-                        intent.putExtra("isShown", isShown);
+                        intent.putExtra("isShown", true);
                         startActivityForResult(intent, REQ_CODE_Q);
                     }
                 });

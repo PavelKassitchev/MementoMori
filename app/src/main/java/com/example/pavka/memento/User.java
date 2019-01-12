@@ -21,4 +21,9 @@ public interface User {
     String getName();
 
     void setName(String name);
+
+    int getReply(int i);
+
+    void setReply(int i, int reply);
+
 }

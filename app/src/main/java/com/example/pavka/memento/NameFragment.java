@@ -32,6 +32,8 @@ public class NameFragment extends Fragment {
     EditText editName;
     RadioGroup genderGroup;
     EditText editDate;
+    private boolean isShown;
+    private User user;
 
 
     public NameFragment() {
@@ -53,8 +55,30 @@ public class NameFragment extends Fragment {
         editName = v.findViewById(R.id.editName);
         genderGroup = v.findViewById(R.id.genderGroup);
         editDate = v.findViewById(R.id.editDate);
+
+        user = ((QuestionnaireActivity) getActivity()).getUser();
+
+        if (!user.getName().equals(getString(R.string.default_username))) {
+            editName.setText(user.getName());
+        }
+
+        switch (user.getGender()) {
+                case User.MALE:
+                    genderGroup.check(R.id.radioM);
+                    break;
+                case User.FEMALE:
+                    genderGroup.check(R.id.radioF);
+                    break;
+        }
+
+        if ((new Date().getTime() - user.getBirthDate().getTime()) > 100000) {
+                SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+                String birthday = formatter.format(user.getBirthDate());
+                editDate.setText(birthday);
+        }
         return v;
     }
+
 
 
 
