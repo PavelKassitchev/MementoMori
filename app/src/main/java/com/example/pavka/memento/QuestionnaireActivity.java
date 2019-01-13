@@ -10,9 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 
 public class QuestionnaireActivity extends AppCompatActivity {
     private SharedPreferences pref;
@@ -58,14 +55,28 @@ public class QuestionnaireActivity extends AppCompatActivity {
 
         fragmentManager = getSupportFragmentManager();
         page = obtainPage();
-        setFragment(page);
+
+        if (page == 0) {
+            NameFragment f = (NameFragment)fragmentManager.findFragmentById(R.id.frgmtContainer);
+
+            if (f == null) {
+                setNameFragment();
+
+            } else {
+                nameFragment = f;
+            }
+
+        }
+        else {
+            setDataFragment(page);
+        }
     }
 
     @Override
     public void onBackPressed() {
         page = 0;
         savePage(page);
-        
+
         super.onBackPressed();
 
     }
@@ -91,17 +102,6 @@ public class QuestionnaireActivity extends AppCompatActivity {
         return user;
     }
 
-    private void setFragment(int page) {
-
-        if (page == 0) {
-            setNameFragment();
-
-        }
-        else {
-            setDataFragment(page);
-        }
-
-    }
 
     private void setNameFragment() {
         nameFragment = new NameFragment();
@@ -110,10 +110,6 @@ public class QuestionnaireActivity extends AppCompatActivity {
         fragmentTransaction.commit();
 
     }
-
-
-
-
 
     private void setDataFragment(int page) {
         dataFragment = new DataFragment();
@@ -160,6 +156,7 @@ public class QuestionnaireActivity extends AppCompatActivity {
                 break;
 
             case R.id.button_next:
+
                 if (page == LAST_PAGE) {
                     user.setReply(LAST_PAGE - 1, dataFragment.getData());
                     page = 0;
@@ -181,6 +178,7 @@ public class QuestionnaireActivity extends AppCompatActivity {
                 }
                 else {
                     if (page == 0) {
+
                         user.setName(nameFragment.getName());
                         user.setGender(nameFragment.getGender());
                         user.setBirthDate(nameFragment.getBirthDate());

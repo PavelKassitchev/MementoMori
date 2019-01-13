@@ -38,14 +38,9 @@ public class AndroidUser implements User {
         this.birthDate = birthDate;
     }
 
-    public int[] getUserData()
-    {
-        int[] newUserData = Arrays.copyOf(userData, userData.length);
-        return newUserData;
-    }
-
-    public void setUserData(int[] userData) {
-        this.userData = userData;
+    @Override
+    public int[] getUserData() {
+        return Arrays.copyOf(userData, userData.length);
     }
 
     @Override

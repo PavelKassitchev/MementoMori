@@ -16,8 +16,6 @@ public interface User {
 
     int[] getUserData();
 
-    void setUserData(int[] userData);
-
     String getName();
 
     void setName(String name);

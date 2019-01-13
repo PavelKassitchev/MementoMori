@@ -1,6 +1,5 @@
 package com.example.pavka.memento;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -16,7 +15,6 @@ public class DataFragment extends Fragment {
     private TextView textView;
     private int page;
     private final String[] QUESTIONS = Questions.getQuestions();
-    private final int LAST_PAGE = Questions.getLength();
     RadioGroup rGroup;
     private User user;
 

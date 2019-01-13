@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public final static String USER = "user";
     public final static String TEMP_USER = "tempUser";
-    public final static String ANSWERS = "answers";
     private final static int REQ_CODE_Q = 1;
     private final static int REQ_CODE_T = 2;
 

@@ -15,7 +15,7 @@ public class AndroidUserHandler implements UserHandler{
     private Gson gson = new Gson();
     private Context context;
     private final double CORRECTION_COEFFICIENT = 1.0;
-    private final int LENGTH = Questions.getLength();
+
     private boolean isTempUser;
 
     public AndroidUserHandler(Context context) {
@@ -40,7 +40,7 @@ public class AndroidUserHandler implements UserHandler{
 
     }
     @Override
-    public User obtainUser() throws Exception {
+    public User obtainUser() {
         String userType = isTempUser? MainActivity.TEMP_USER : MainActivity.USER;
         String userString = sPrefs.getString(userType, null);
 
@@ -69,31 +69,5 @@ public class AndroidUserHandler implements UserHandler{
         return new AndroidUser(context);
     }
 
-    @Override
-    public void saveUserAnswers(int[] answers) throws Exception {
-        String userString = gson.toJson(answers);
 
-        SharedPreferences.Editor editor = sPrefs.edit();
-        editor.putString(MainActivity.ANSWERS, userString);
-        editor.apply();
-    }
-
-    @Override
-    public int[] obtainUserAnswers() throws Exception {
-        String userString = sPrefs.getString(MainActivity.ANSWERS, null);
-        if (userString == null) {
-            return new int[LENGTH];
-        }
-        return gson.fromJson(userString, int[].class);
-    }
-
-    @Override
-    public User copyUser(User user) {
-        User newUser = new AndroidUser(context);
-        newUser.setName(user.getName());
-        newUser.setBirthDate(user.getBirthDate());
-        newUser.setGender(user.getGender());
-        newUser.setUserData(user.getUserData());
-        return newUser;
-    }
 }

@@ -17,23 +17,11 @@ import java.util.Date;
 
 public class NameFragment extends Fragment {
 
-    public EditText getEditName() {
-        return editName;
-    }
 
-    public RadioGroup getGenderGroup() {
-        return genderGroup;
-    }
+    private EditText editName;
+    private RadioGroup genderGroup;
+    private EditText editDate;
 
-    public EditText getEditDate() {
-        return editDate;
-    }
-
-    EditText editName;
-    RadioGroup genderGroup;
-    EditText editDate;
-    private boolean isShown;
-    private User user;
 
 
     public NameFragment() {
@@ -43,7 +31,6 @@ public class NameFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
     }
 
@@ -56,26 +43,27 @@ public class NameFragment extends Fragment {
         genderGroup = v.findViewById(R.id.genderGroup);
         editDate = v.findViewById(R.id.editDate);
 
-        user = ((QuestionnaireActivity) getActivity()).getUser();
+        User user = ((QuestionnaireActivity) getActivity()).getUser();
 
         if (!user.getName().equals(getString(R.string.default_username))) {
-            editName.setText(user.getName());
-        }
+                editName.setText(user.getName());
+            }
 
-        switch (user.getGender()) {
+            switch (user.getGender()) {
                 case User.MALE:
                     genderGroup.check(R.id.radioM);
                     break;
                 case User.FEMALE:
                     genderGroup.check(R.id.radioF);
                     break;
-        }
+            }
 
-        if ((new Date().getTime() - user.getBirthDate().getTime()) > 100000) {
+            if ((new Date().getTime() - user.getBirthDate().getTime()) > 100000) {
                 SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
                 String birthday = formatter.format(user.getBirthDate());
                 editDate.setText(birthday);
-        }
+            }
+
         return v;
     }
 
