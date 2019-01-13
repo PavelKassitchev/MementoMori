@@ -26,8 +26,11 @@ public enum Questions {
 
 
     private static int qLength = Questions.values().length;
+    //question text
     private final String QUESTION;
+    //how many years to add if positive reply
     private final double IF_POSITIVE;
+    //how many years to add if negative reply
     private final double IF_NEGATIVE;
 
 

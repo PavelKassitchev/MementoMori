@@ -3,6 +3,7 @@ package com.example.pavka.memento;
 
 import java.util.Date;
 
+//life span calculator for User user
 public class AndroidCocoo implements Cocoo {
 
     private User user;
@@ -11,6 +12,7 @@ public class AndroidCocoo implements Cocoo {
         this.user = user;
     }
     @Override
+    //returns the current user's age in years
     public double getCurrentAge() {
         Date birthDate = user.getBirthDate();
         Date today = new Date();
@@ -18,6 +20,7 @@ public class AndroidCocoo implements Cocoo {
     }
 
     @Override
+    //returns personal correction on INITIAL life span depending on the user's reply to questions
     public double getCorrection() {
         double correction = 0;
         for (int i=0; i<Questions.getLength(); i++) {
@@ -36,6 +39,7 @@ public class AndroidCocoo implements Cocoo {
 
 
     @Override
+    //returns the expected REMAINING life span in years, depending on user's geneder and current age
     public double getLifeSpan() {
         int gender = user.getGender();
         double ageInYears = getCurrentAge();

@@ -13,15 +13,15 @@ public interface User {
     Date getBirthDate();
 
     void setBirthDate(Date birthDate);
-
+    //array of replies
     int[] getUserData();
 
     String getName();
 
     void setName(String name);
-
+    //getter for reply # i
     int getReply(int i);
-
+    //setter for reply # i
     void setReply(int i, int reply);
 
 }

@@ -14,7 +14,7 @@ public class AndroidUser implements User {
     private Date birthDate;
     private int[] userData;
 
-
+    //constructs a "non-gender" just-born user with default neutral replies to the questions
     public AndroidUser(Context context) {
         name = context.getString(R.string.default_username);
         gender = 0;
@@ -39,6 +39,7 @@ public class AndroidUser implements User {
     }
 
     @Override
+    //returns an array of the user's replies'
     public int[] getUserData() {
         return Arrays.copyOf(userData, userData.length);
     }
@@ -54,11 +55,13 @@ public class AndroidUser implements User {
     }
 
     @Override
+    //returns the user's reply to question# i.
     public int getReply(int i) {
         return userData[i];
     }
 
     @Override
+    //sets the user's reply to question# i.
     public void setReply(int i, int reply) {
         userData[i] = reply;
     }

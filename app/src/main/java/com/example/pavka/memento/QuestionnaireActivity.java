@@ -88,7 +88,7 @@ public class QuestionnaireActivity extends AppCompatActivity {
             userHandler.saveUser(user);
             intent.putExtra("isShown", true);
         } catch (Exception e) {
-            //TODO Exception processing
+            //TODO exception
         }
         super.onPause();
 
