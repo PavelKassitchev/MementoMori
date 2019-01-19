@@ -47,8 +47,8 @@ public class CubicCuckoo implements Cuckoo {
         double defaultFemaleLifeSpan = 0.0000624 * Math.pow(ageInYears, 3) - 0.00532 * Math.pow(ageInYears, 2) + 0.157 * ageInYears + AVG_FEMALE;
 
         switch (gender) {
-            case AndroidUser.MALE: return defaultMaleLifeSpan;
-            case AndroidUser.FEMALE: return defaultFemaleLifeSpan;
+            case User.MALE: return defaultMaleLifeSpan;
+            case User.FEMALE: return defaultFemaleLifeSpan;
             default: return (defaultFemaleLifeSpan + defaultMaleLifeSpan) / 2;
         }
     }
