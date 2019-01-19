@@ -2,7 +2,7 @@ package com.example.pavka.memento;
 
 
 //Life span calculator interface
-public interface Cocoo {
+public interface Cuckoo {
     //default just-born male life span
     double AVG_MALE = 68.583;
     //default just-borne female life span

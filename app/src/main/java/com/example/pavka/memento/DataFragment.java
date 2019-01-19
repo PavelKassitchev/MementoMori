@@ -9,12 +9,16 @@ import android.view.ViewGroup;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-
+//incapsulates the main view of QuestionnaireActivity
 public class DataFragment extends Fragment {
 
+    //question text
     private TextView textView;
+    //each question is shown on a separate page
     private int page;
+    //array of questions
     private final String[] QUESTIONS = Questions.getQuestions();
+    //yes/no radio buttons
     RadioGroup rGroup;
     private User user;
 
@@ -45,6 +49,7 @@ public class DataFragment extends Fragment {
         this.page = page;
     }
 
+    //sets question and checked radio button (if necessary)
     public void update() {
 
         textView.setText(QUESTIONS[page - 1]);
@@ -62,6 +67,7 @@ public class DataFragment extends Fragment {
 
     }
 
+    //collects user's replies - +1 for positive, -1 for negative
     public int getData() {
         switch(rGroup.getCheckedRadioButtonId()) {
             case R.id.radioY:

@@ -4,11 +4,11 @@ package com.example.pavka.memento;
 import java.util.Date;
 
 //life span calculator for User user
-public class AndroidCocoo implements Cocoo {
+public class CubicCuckoo implements Cuckoo {
 
     private User user;
 
-    public AndroidCocoo(User user) {
+    public CubicCuckoo(User user) {
         this.user = user;
     }
     @Override

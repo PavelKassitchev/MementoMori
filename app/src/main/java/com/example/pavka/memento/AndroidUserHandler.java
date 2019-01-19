@@ -52,15 +52,15 @@ public class AndroidUserHandler implements UserHandler{
 
     @Override
     public double calculateLifeSpan(User user) {
-      Cocoo cocoo = new AndroidCocoo(user);
+      Cuckoo cuckoo = new CubicCuckoo(user);
       //remaining life span
-        double initialLifeSpan = cocoo.getLifeSpan();
+        double initialLifeSpan = cuckoo.getLifeSpan();
         //current age
-        double currentAge = cocoo.getCurrentAge();
+        double currentAge = cuckoo.getCurrentAge();
         //a remaining life span ratio
         double ratio = (initialLifeSpan - currentAge) / initialLifeSpan;
         //personal correction on INITIAL life span
-        double correction = cocoo.getCorrection();
+        double correction = cuckoo.getCorrection();
         //returns corrected life span
         return initialLifeSpan + ratio * correction * CORRECTION_COEFFICIENT;
     }
@@ -68,7 +68,7 @@ public class AndroidUserHandler implements UserHandler{
     @Override
     //returns the Date of death
     public Date getLastDate(User user) {
-        long spanInMillis = user.getBirthDate().getTime() + (long)(calculateLifeSpan(user) * Cocoo.MILLIS_IN_YEAR);
+        long spanInMillis = user.getBirthDate().getTime() + (long)(calculateLifeSpan(user) * Cuckoo.MILLIS_IN_YEAR);
         return new Date(spanInMillis);
     }
 
