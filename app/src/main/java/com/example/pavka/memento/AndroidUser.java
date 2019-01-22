@@ -14,6 +14,7 @@ public class AndroidUser implements User {
     private Date birthDate;
     private int[] userData;
 
+
     //constructs a "non-gender" just-born user with default neutral replies to the questions
     public AndroidUser(Context context) {
         name = context.getString(R.string.default_username);
